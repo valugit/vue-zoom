@@ -1,13 +1,11 @@
 <template>
   <div class="zoom">
-    <img ref="original"
-      id="original"
-      src="@/assets/poster.jpg" 
+    <img src="@/assets/poster.jpg" 
       alt="An awsome poster of The Legend of Zelda: The Wind Waker"
       @mouseenter="hover = true"
       @mousemove="setLensPosition($event)"
       @mouseleave="hover = false">
-    <div v-show="hover" ref="zoom" id="lens" />
+    <div v-show="hover" ref="zoom" class="lens" />
   </div>
 </template>
 
@@ -27,8 +25,8 @@ export default {
       style.left = `${x}px`
       style.top = `${y}px`
       style.backgroundImage = `url(${e.target.src})`
-      style.backgroundPosition = `${-(Math.floor(x * 2))}px ${-(Math.floor(y * 2))}px`
-      style.backgroundSize= `auto ${Math.floor(parseInt(e.target.height) * 2 - 250)}px`
+      style.backgroundPosition = `${-(Math.round(x * 2))}px ${-(Math.floor(y * 2))}px`
+      style.backgroundSize= `auto ${Math.round(parseInt(e.target.height) * 2 - 250)}px`
     }
   },
 }
@@ -42,13 +40,13 @@ export default {
   justify-content: center;
   align-items: center;
 }
-#original {
+.zoom > img {
   position: initial;
   z-index: 0;
   border: 1px solid black;
   max-height: 95%;
 }
-#lens {
+.lens {
   position: absolute;
   z-index: 1;
   background-color: #2c3e50;
